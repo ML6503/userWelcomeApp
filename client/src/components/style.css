@@ -1,0 +1,134 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --app-background-color: #222;
+  /* --app-background-color: #003835; */
+  --app-highlight-color: #a52c26;
+  --app-font: 'Anek Malayalam', Arial, sans-serif;
+  --shop-gold-color: #b57f0c;
+  --app-txt-color: #f2eecb;
+  --app-highlight-color: #00ffff;
+}
+
+body {
+  height: 100vh;
+  background-color: var(--app-background-color);
+  color: var(--app-txt-color);
+  font-family: var(--app-font) !important;
+  font-size: 16px;
+}
+
+.user-view-wrapper {
+  padding: 10vh 5vw;
+}
+
+.user-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-wraper {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+@media screen {
+  .form-wraper {
+    width: 80vw;
+  }
+}
+
+.form-wraper h4 {
+  text-align: center;
+}
+
+.form {
+  padding: 5vh;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 35vh;
+  min-height: 200px;
+}
+
+.form-label {
+}
+
+.form-element {
+  padding-bottom: 3vh;
+}
+
+.form-input {
+  width: 100%;
+  max-width: 350px;
+  min-width: 215px;
+  font-style: italic;
+  /* height: 3vh; */
+  border-radius: 5px;
+  padding: 1vh;
+}
+
+.form-submit-button {
+  cursor: pointer;
+  width: 50%;
+  align-self: center;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 1vh;
+  /* background-color: #78e4c2; */
+  background-color: transparent;
+  color: var(--app-txt-color);
+  border-color: var(--app-txt-color);
+}
+
+.signup-wrapper {
+  align-self: center;
+  display: flex;
+  /* width: 14rem; */
+  padding: 3vh;
+  justify-content: space-between;
+}
+
+.signup-span,
+.logout-span {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.signup-span:hover,
+.logout-span:hover {
+  cursor: pointer;
+  color: #0066ff;
+}
+
+.signup-span {
+  padding-left: 5px;
+}
+
+.logout-span {
+  padding: 2vh 0;
+}
+
+.welcome-user-wrapper {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 10vh 5vw;
+}
+
+.username-wrapper {
+  padding: 3vh 3vw;
+  display: flex;
+  flex-direction: column;
+}

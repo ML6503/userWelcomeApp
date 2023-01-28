@@ -1,0 +1,25 @@
+Implementation details:
+
+The app should allow the users to register, login, and log out.
+The minimum user data to be stored are 
+email, password, and full name. 
+The password should be a minimum of 8 characters 
+with at least one number and one character. 
+The full name should be at least 5 characters long.
+When logging in, the app should show the following message 
+"Welcome ! To logout click here". 
+should be the name of the registered user 
+and the word here should be a link that would log the user out.
+
+Automated tests are required. The candidate is free to pick the tests to be implemented.
+
+Things to consider:
+- Use React for the client-side web application.
+- Pick durable storage (files, databases, etc) of your choice to save the user data.
+You can use any dependency library you prefer. 
+
+Extra points if the following list of requests is fulfilled:
+- Node.js with Express Framework for the API
+- Use a relational database to store the user data
+
+Deadline: 2nd of February 2023
