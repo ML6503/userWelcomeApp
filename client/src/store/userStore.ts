@@ -3,24 +3,28 @@ import { IUser } from '../utils/interface';
 
 export default class UserStore {
   private _user: {} | IUser;
-  private _name: string;
+  private _isAuth: boolean;
 
   constructor() {
+    this._isAuth = false;
     this._user = {};
-    this._name = '';
+
     makeAutoObservable(this);
+  }
+
+  public setIsAuth(isAuth: boolean) {
+    this._isAuth = isAuth;
   }
 
   public setUser(user: IUser) {
     this._user = user;
-    this._name = user.name;
   }
 
   public get user() {
     return this._user;
   }
 
-  public get name() {
-    return this._name;
+  public get isAuth() {
+    return this._isAuth;
   }
 }

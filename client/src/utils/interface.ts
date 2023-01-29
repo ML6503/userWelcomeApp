@@ -3,3 +3,7 @@ export interface IUser {
   password: string;
   name: string;
 }
+
+export interface IValueUser {
+  [x: string]: string;
+}
