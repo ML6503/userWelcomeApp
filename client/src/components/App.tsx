@@ -6,16 +6,6 @@ import Auth from './Auth';
 import { IUser } from 'utils/interface';
 
 const App: FC = observer(() => {
-  // const [isAnim, setIsAnim] = useState(false);
-  // const [isLoggedIn, setLoggedIn] = useState(false);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsAnim((prev) => !prev);
-  //   }, 1000);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
   const appContext = useContext(AppContext);
   const isLoggedIn = appContext?.user.isAuth;
 
@@ -29,15 +19,25 @@ const App: FC = observer(() => {
   const appUser = appContext?.user.user;
   const appUserName = (appUser as IUser).name;
   console.log('appUser auth?: ', appContext?.user.isAuth);
+
+  const toLogout = (e: React.MouseEvent<HTMLSpanElement>) => {
+    e.preventDefault();
+    appContext?.user.setIsAuth(false);
+  };
+
   return (
     <>
-      {/* {isAnim && <HelloAnimation />} */}
       {isLoggedIn && (
         <div className="welcome-user-wrapper">
           <WelcomeAnimation />
           <div className="username-wrapper">
             <span> {appUserName}! </span>
-            <span className="logout-span">To logout click here</span>
+            <span className="logout-span-container">
+              To logout click{' '}
+              <span className="logout-span" onClick={toLogout}>
+                here
+              </span>
+            </span>
           </div>
         </div>
       )}
