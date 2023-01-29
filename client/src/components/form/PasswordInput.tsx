@@ -6,11 +6,6 @@ interface IPasswordInputProps {
 }
 
 const PasswordInput: React.FC<IPasswordInputProps> = ({ password, handleFormChange }) => {
-  const passwordValidity = (e: React.FormEvent) =>
-    (e.target as HTMLInputElement).setCustomValidity(
-      'Password should be a minimum of 8 characters with at least 1 number and 1 character'
-    );
-
   return (
     <div className="form-element">
       <label className="form-label" htmlFor="password">
@@ -24,9 +19,9 @@ const PasswordInput: React.FC<IPasswordInputProps> = ({ password, handleFormChan
         placeholder="Your password..."
         value={password}
         required
-        pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/"
-        onInvalid={passwordValidity}
+        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
         onChange={handleFormChange}
+        title="Password should be a minimum of 8 characters with at least 1 number and 1 special character"
       />
     </div>
   );

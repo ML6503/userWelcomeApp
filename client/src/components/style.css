@@ -79,6 +79,10 @@ body {
   padding: 1vh;
 }
 
+.form-input:invalid {
+  color: red;
+}
+
 .form-submit-button {
   cursor: pointer;
   width: 50%;
