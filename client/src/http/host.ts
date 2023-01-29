@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const host = axios.create({
+const host = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   headers: {
     // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -9,7 +9,16 @@ export const host = axios.create({
   },
 });
 
-axios.interceptors.request.use((config) => {
+const authHost = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8',
+  },
+});
+
+authHost.interceptors.request.use((config) => {
   config.headers.authorization = `Bearer ${localStorage.getItem('token')}`;
   return config;
 });
+
+export { host, authHost };
