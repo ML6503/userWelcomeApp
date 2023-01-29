@@ -1,6 +1,6 @@
 import React, { useState, useReducer } from 'react';
 import { IUser, IValueUser } from 'utils/interface';
-import { registration } from '../http/userAPI';
+import { registration, login } from '../http/userAPI';
 import PasswordInput from './form/PasswordInput';
 import FullNameInput from './form/FullNameInput';
 import EmailInput from './form/EmailInput';
@@ -35,9 +35,9 @@ const Enter = () => {
     e.preventDefault();
 
     if (isNewUser) {
-      // const response = await registration();
+      const response = await registration(name, email, password);
     } else {
-      // const response = await login();
+      const response = await login(email, password);
     }
   };
 

@@ -13,7 +13,7 @@ const PasswordInput: React.FC<IPasswordInputProps> = ({ password, handleFormChan
       </label>
       <input
         className="form-input"
-        type="text"
+        type="password"
         id="password"
         name="password"
         placeholder="Your password..."

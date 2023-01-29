@@ -1,4 +1,4 @@
-import { host } from './instance';
+import { host } from './host';
 
 export const registration = async (fullname: string, email: string, password: string) => {
   const response = await host.post('api/registration', { fullname, email, password });
