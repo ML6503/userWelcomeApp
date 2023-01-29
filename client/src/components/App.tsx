@@ -2,7 +2,7 @@ import { FC, useEffect, useContext, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import WelcomeAnimation from './WelcomeAnimation';
 import { AppContext } from '../index';
-import Enter from './Enter';
+import Auth from './Auth';
 import { IUser } from 'utils/interface';
 
 const App: FC = observer(() => {
@@ -41,7 +41,7 @@ const App: FC = observer(() => {
           </div>
         </div>
       )}
-      {!isLoggedIn && <Enter />}
+      {!isLoggedIn && <Auth />}
     </>
   );
 });

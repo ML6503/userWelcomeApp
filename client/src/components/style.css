@@ -83,24 +83,34 @@ body {
   color: red;
 }
 
+.error {
+  color: red;
+  height: 2rem;
+  min-height: 2rem;
+  text-align: center;
+}
+
+.form-submit-button-wrapper {
+  width: 100%;
+  padding-top: 2vh;
+}
+
 .form-submit-button {
   cursor: pointer;
   width: 50%;
-  align-self: center;
   border-radius: 5px;
   font-weight: bold;
   padding: 1vh;
-  /* background-color: #78e4c2; */
   background-color: transparent;
   color: var(--app-txt-color);
   border-color: var(--app-txt-color);
 }
 
 .signup-wrapper {
-  align-self: center;
+  align-self: flex-end;
   display: flex;
   /* width: 14rem; */
-  padding: 3vh;
+  padding: 3vh 0;
   justify-content: space-between;
 }
 

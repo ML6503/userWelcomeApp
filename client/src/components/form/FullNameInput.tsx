@@ -21,9 +21,9 @@ const FullNameInput: React.FC<IFullNameInputProps> = ({ name, handleFormChange }
         required
         minLength={5}
         min="5"
-        maxLength={50}
-        max="50"
-        pattern=".{5}"
+        maxLength={40}
+        max="40"
+        pattern=".{5,40}"
         onChange={handleFormChange}
       />
     </div>
