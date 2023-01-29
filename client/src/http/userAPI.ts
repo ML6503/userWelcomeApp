@@ -14,8 +14,8 @@ export const login = async (email: string, password: string) => {
   return jwt_decode(data.token) as IUser;
 };
 
-export const check = async (email: string, password: string) => {
-  const { data } = await authHost.post('api/auth', { email, password });
+export const check = async () => {
+  const { data } = await authHost.get('api/auth');
   localStorage.setItem('token', data.token);
   return jwt_decode(data.token) as IUser;
 };
