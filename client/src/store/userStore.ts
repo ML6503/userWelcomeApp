@@ -16,7 +16,7 @@ export default class UserStore {
     this._isAuth = isAuth;
   }
 
-  public setUser(user: IUser) {
+  public setUser(user: IUser | {}) {
     this._user = user;
   }
 

@@ -43,6 +43,7 @@ const App: FC = observer(() => {
   const toLogout = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
     appContext?.user.setIsAuth(false);
+    appContext?.user.setUser({});
   };
 
   const loggedUserView = (
