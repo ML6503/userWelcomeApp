@@ -10,7 +10,7 @@ class UserController {
   async registration(req, res, next) {
     const { name, email, password } = req.body;
     if (!email || !password) {
-      return next(ServerError.badRequest('password or email is not correct'));
+      return next(ServerError.badRequest('Password or email is not correct'));
     }
     const user = await User.findOne({
       where: {
@@ -18,12 +18,39 @@ class UserController {
       },
     });
     if (user) {
-      return next(ServerError.badRequest('user with specified email already exists'));
+      return next(ServerError.badRequest('User with specified email already exists'));
     }
     const hashedPassword = await bcrypt.hash(password, +process.env.SALT);
-    console.log('hashed pswd: ', hashedPassword);
     const newUser = await User.create({ name: name, email: email, password: hashedPassword });
     const token = getToken(newUser.id, newUser.email, newUser.name);
+    return res.json({ token });
+  }
+
+  async login(req, res, next) {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return next(ServerError.badRequest('Password or email is not correct'));
+    }
+    const user = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+    if (!user) {
+      return next(ServerError.internal('User not found'));
+    }
+    let comparePassword = bcrypt.compareSync(password, user.password);
+    if (!comparePassword) {
+      return next(ApiError.internal('Password is incorrect'));
+    }
+
+    const token = getToken(newUser.id, newUser.email, newUser.name);
+    return res.json({ token });
+  }
+
+  async authCheck(req, res, _next) {
+    const { id, email, name } = req.user;
+    const token = getToken(id, email, name);
     return res.json({ token });
   }
 }
