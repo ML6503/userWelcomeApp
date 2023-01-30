@@ -9,6 +9,7 @@ import EmailInput from './form/EmailInput';
 import SignupEl from './form/SignupEl';
 // import { AppContext } from '../index';
 import UserStore from '../store/userStore';
+import SubmitButton from './form/SubmitButton';
 
 const Auth = observer(() => {
   // const appContext = useContext(AppContext);
@@ -44,8 +45,8 @@ const Auth = observer(() => {
     setFormValues({ [name]: value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     try {
       // const userStore = appContext?.user;
       const userStore = new UserStore();
@@ -77,25 +78,17 @@ const Auth = observer(() => {
     setIsNewUser((prev) => !prev);
   };
 
-  const errorEl = <span className="error">{error !== '' && error}</span>;
-
-  const submitButton = (
-    <div className="form-submit-button-wrapper">
-      <button className="form-submit-button">{isNewUser ? 'Signup' : 'Login'}</button>
-    </div>
-  );
-
   return (
     <div className="user-view-wrapper">
       <div className="user-view">
         <div className="form-wraper">
           {isNewUser ? <h4>Getting started</h4> : <h4>Log into your account</h4>}
           <form className="form" onSubmit={handleSubmit}>
-            {errorEl}
+            <span className="error">{error !== '' && error}</span>
             {isNewUser && <FullNameInput name={name} handleFormChange={handleFormChange} />}
             <EmailInput email={email} handleFormChange={handleFormChange} />
             <PasswordInput password={password} handleFormChange={handleFormChange} />
-            {submitButton}
+            <SubmitButton isNewUser={isNewUser} />
             <SignupEl isNewUser={isNewUser} toEnterApp={toEnterApp} />
           </form>
         </div>
