@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 /* POST to register new user */
-router.post('/registration', function (req, res, next) {
-  res.send('registration');
-});
+router.post('/registration', userController.registration);
 
 /* POST to register new user */
 router.post('/login', function (req, res, next) {
