@@ -1,16 +1,17 @@
 import React, { useState, useReducer, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
+import { AxiosError } from 'axios';
 import { IUser, IValueUser } from 'utils/interface';
 import { registration, login } from '../http/userAPI';
 import PasswordInput from './form/PasswordInput';
 import FullNameInput from './form/FullNameInput';
 import EmailInput from './form/EmailInput';
 import SignupEl from './form/SignupEl';
-import { AppContext } from '../index';
-import { AxiosError } from 'axios';
+// import { AppContext } from '../index';
+import UserStore from '../store/userStore';
 
 const Auth = observer(() => {
-  const appContext = useContext(AppContext);
+  // const appContext = useContext(AppContext);
   const [isNewUser, setIsNewUser] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>('');
 
@@ -46,7 +47,8 @@ const Auth = observer(() => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const userStore = appContext?.user;
+      // const userStore = appContext?.user;
+      const userStore = new UserStore();
       let user: IUser;
 
       if (isNewUser) {
