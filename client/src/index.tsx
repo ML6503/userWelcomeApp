@@ -8,9 +8,6 @@ interface IAppContext {
 }
 
 export const AppContext = createContext<IAppContext | null>(null);
-const API_URL = process.env.REACT_APP_API_URL;
-console.log('api', API_URL);
-
 const container = document.querySelector('#app');
 
 if (container) {
