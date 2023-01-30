@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
+var fs = require('fs');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -9,15 +10,19 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
+// log all requests to access.log
+app.use(logger('common', { stream: accessLogStream }));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(cors);
+
 // app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

@@ -1,9 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
+/* POST to register new user */
+router.post('/registration', function (req, res, next) {
+  res.send('registration');
+});
+
+/* POST to register new user */
+router.post('/login', function (req, res, next) {
+  res.send('login');
+});
+
+/* GET to check users auth */
+router.get('/auth', function (req, res, next) {
+  res.send('check auth');
 });
 
 module.exports = router;
