@@ -18,7 +18,7 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 // log all requests to access.log
 app.use(logger('common', { stream: accessLogStream }));
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

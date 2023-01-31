@@ -7,12 +7,13 @@ import PasswordInput from './form/PasswordInput';
 import FullNameInput from './form/FullNameInput';
 import EmailInput from './form/EmailInput';
 import SignupEl from './form/SignupEl';
-// import { AppContext } from '../index';
 import UserStore from '../store/userStore';
 import SubmitButton from './form/SubmitButton';
 
-const Auth = observer(() => {
-  // const appContext = useContext(AppContext);
+interface IAuthProps {
+  userStore: UserStore;
+}
+const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
   const [isNewUser, setIsNewUser] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>('');
 
@@ -30,26 +31,25 @@ const Auth = observer(() => {
   );
 
   const { name, email, password } = formValues;
+  console.log('', formValues);
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
     const value = event.target.value;
-    const name = event.target.name;
+    const inputName = event.target.name;
 
     setError((prev) => {
       if (prev !== value) {
         return '';
       }
     });
-    setFormValues({ [name]: value });
+    setFormValues({ [inputName]: value });
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      // const userStore = appContext?.user;
-      const userStore = new UserStore();
       let user: IUser;
 
       if (isNewUser) {
@@ -58,16 +58,18 @@ const Auth = observer(() => {
         user = await login(email, password);
         console.log('api response:', user);
       }
-      userStore!.setUser(user);
-      userStore!.setIsAuth(true);
+      userStore.setUser(user);
+      userStore.setIsAuth(true);
+      console.log('auth comp - isAuth user is: ', userStore.user);
     } catch (e) {
       if (e instanceof AxiosError) {
         const errorText = e.response?.data.message;
-        console.error(errorText);
+
         if (isNewUser && errorText?.includes('email')) {
           setError(errorText);
         }
-      } else {
+      } else if (e instanceof Error) {
+        setError(e.message);
         console.error(e);
       }
     }
