@@ -58,7 +58,6 @@ const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
       }
       userStore.setUser(user);
       userStore.setIsAuth(true);
-      console.log('auth comp - isAuth user is: ', userStore.user);
     } catch (e) {
       if (e instanceof AxiosError) {
         const errorText = e.response?.data.message;
