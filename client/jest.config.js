@@ -27,6 +27,13 @@ module.exports = {
 
   // Module file extensions for importing
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/__mocks__/fileMock.js',
+    // '\\.(css|less)$': 'identity-obj-proxy',
+    '\\.(css|less)$': '<rootDir>/src/__tests__/__mocks__/styleMock.js',
+    '^~/(.*)$': '<rootDir>/$1',
+  },
 };
 
 // /** @type {import('ts-jest').JestConfigWithTsJest} */

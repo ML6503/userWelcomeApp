@@ -27,7 +27,7 @@ const App: FC = observer(() => {
 
   if (loading) {
     return (
-      <div className="loader-wrapper">
+      <div data-testid="loader" className="loader-wrapper">
         <span className="loader"></span>
       </div>
     );

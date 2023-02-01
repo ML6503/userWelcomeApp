@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "build": "webpack --mode=production --node-env=production",
+    "build": "webpack --mode=production --node-env=production --env REACT_APP_API_URL='https://api-user-welcome-app.onrender.com:5000/' ",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
@@ -29,6 +29,7 @@
     "css-loader": "^6.7.3",
     "dotenv-webpack": "^8.0.1",
     "html-webpack-plugin": "^5.5.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^29.4.1",
     "jest-environment-jsdom": "^29.4.1",
     "mini-css-extract-plugin": "^2.7.2",
