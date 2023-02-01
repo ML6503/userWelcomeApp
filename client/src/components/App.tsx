@@ -13,14 +13,14 @@ const user = new UserStore();
 const App: FC = observer(() => {
   const [loading, setLoading] = useState(true);
 
-  const isLoggedIn = user.isAuth;
-  console.log('auth comp - isAuth is: ', user.isAuth);
-
   useEffect(() => {
     check()
       .then((data) => {
         user.setUser(data);
         user.setIsAuth(true);
+      })
+      .catch((e) => {
+        console.info(e);
       })
       .finally(() => setLoading((prev) => !prev));
   }, []);
@@ -33,9 +33,6 @@ const App: FC = observer(() => {
     );
   }
 
-  // const appUser = user.user;
-  // const appUserName = (appUser as IUser).name;
-
   const toLogout = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();
 
@@ -43,7 +40,7 @@ const App: FC = observer(() => {
     user.setUser({});
     window.localStorage.setItem('token', '');
   };
-  console.log('USER in welcome: ', (user.user as IUser).name);
+
   const LoggedUserView = () => {
     return (
       <div className="welcome-user-wrapper">

@@ -55,7 +55,6 @@ const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
         user = await registration(name, email, password);
       } else {
         user = await login(email, password);
-        console.log('api response:', user);
       }
       userStore.setUser(user);
       userStore.setIsAuth(true);
@@ -64,11 +63,7 @@ const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
       if (e instanceof AxiosError) {
         const errorText = e.response?.data.message;
         setError(errorText);
-        // if (isNewUser && errorText?.includes('email')) {
-        //   setError(errorText);
-        // }
-      } else if (e instanceof Error) {
-        // setError(e.message);
+      } else {
         console.error(e);
       }
     }
