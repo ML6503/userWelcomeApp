@@ -33,8 +33,8 @@ const App: FC = observer(() => {
     );
   }
 
-  const appUser = user.user;
-  const appUserName = (appUser as IUser).name;
+  // const appUser = user.user;
+  // const appUserName = (appUser as IUser).name;
 
   const toLogout = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault();

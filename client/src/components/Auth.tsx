@@ -31,7 +31,6 @@ const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
   );
 
   const { name, email, password } = formValues;
-  console.log('', formValues);
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -64,10 +63,10 @@ const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
     } catch (e) {
       if (e instanceof AxiosError) {
         const errorText = e.response?.data.message;
-
-        if (isNewUser && errorText?.includes('email')) {
-          setError(errorText);
-        }
+        setError(errorText);
+        // if (isNewUser && errorText?.includes('email')) {
+        //   setError(errorText);
+        // }
       } else if (e instanceof Error) {
         // setError(e.message);
         console.error(e);
@@ -78,6 +77,7 @@ const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
   const toEnterApp = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.preventDefault;
     setIsNewUser((prev) => !prev);
+    setError('');
   };
 
   return (
