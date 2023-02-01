@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "build": "webpack --mode=production --node-env=production --node-env EACT_APP_API_URL='https://api-user-welcome-app.onrender.com/' ",
-    "build:dev": "webpack --mode=development",
+    "build": "webpack --mode=production --node-env=production --env REACT_APP_API_URL='https://api-user-welcome-app.onrender.com/' ",
+    "build:dev": "cross-env NODE_ENV=development REACT_APP_API_URL=https://api-user-welcome-app.onrender.com/ webpack serve --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
     "dev": "cross-env NODE_ENV=development webpack serve"
@@ -22,7 +22,6 @@
     "@types/jest": "^29.4.0",
     "@types/node": "^18.11.18",
     "@types/react-dom": "^18.0.10",
-    "@types/reflect-metadata": "^0.1.0",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@webpack-cli/generators": "^3.0.1",
     "cross-env": "^7.0.3",
