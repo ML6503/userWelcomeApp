@@ -9,7 +9,7 @@ const getToken = (id, email, name) => {
 
 class UserController {
   async registration(req, res, next) {
-    const { fullname, email, password } = req.body;
+    const { name, email, password } = req.body;
     console.log('user details', req.body);
     if (!email || !password) {
       return next(ServerError.badRequest('Password or email is not correct'));
@@ -23,7 +23,7 @@ class UserController {
       return next(ServerError.badRequest('User with specified email already exists'));
     }
     const hashedPassword = await bcrypt.hash(password, +process.env.SALT);
-    const newUser = await User.create({ name: fullname, email: email, password: hashedPassword });
+    const newUser = await User.create({ name: name, email: email, password: hashedPassword });
     const token = getToken(newUser.id, newUser.email, newUser.name);
     return res.json({ token });
   }
@@ -52,6 +52,7 @@ class UserController {
 
   async authCheck(req, res, _next) {
     const { id, email, name } = req.user;
+
     const token = getToken(id, email, name);
     return res.json({ token });
   }

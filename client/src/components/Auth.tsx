@@ -69,7 +69,7 @@ const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
           setError(errorText);
         }
       } else if (e instanceof Error) {
-        setError(e.message);
+        // setError(e.message);
         console.error(e);
       }
     }
