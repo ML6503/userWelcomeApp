@@ -1,12 +1,11 @@
 import { FC, useEffect, useContext, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import './loaderStyle.css';
-import WelcomeAnimation from './WelcomeAnimation';
-// import { AppContext } from '../index';
 import Auth from './Auth';
-import { IUser } from 'utils/interface';
+
 import { check } from '../http/userAPI';
 import UserStore from '../store/userStore';
+import LoggedUserView from './LoggedUserView';
 
 const user = new UserStore();
 
@@ -41,26 +40,9 @@ const App: FC = observer(() => {
     window.localStorage.setItem('token', '');
   };
 
-  const LoggedUserView = () => {
-    return (
-      <div className="welcome-user-wrapper">
-        <WelcomeAnimation />
-        <div className="username-wrapper">
-          <span> {(user.user as IUser).name}! </span>
-          <span className="logout-span-container">
-            To logout click{' '}
-            <span className="logout-span" onClick={toLogout}>
-              here
-            </span>
-          </span>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <>
-      {user.isAuth && <LoggedUserView />}
+      {user.isAuth && <LoggedUserView toLogout={toLogout} userStore={user} />}
       {!user.isAuth && <Auth userStore={user} />}
     </>
   );

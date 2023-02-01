@@ -11,6 +11,8 @@ describe('App when render', () => {
     const loader = screen.getByTestId('loader');
     expect(loader).toBeInTheDocument();
 
+    expect(screen.queryByText(/Log into your account/)).toBeNull();
+
     // const logMsg = screen.getByText('Log into your account');
     // expect(logMsg).toBeInTheDocument();
     // const clickSignupMsg = screen.getByText('Click to signup');
@@ -20,3 +22,5 @@ describe('App when render', () => {
     // expect(clickLoginMsg).toBeInTheDocument();
   });
 });
+
+// https://www.robinwieruch.de/react-testing-library/
