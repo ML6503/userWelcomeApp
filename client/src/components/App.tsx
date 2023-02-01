@@ -41,6 +41,7 @@ const App: FC = observer(() => {
 
     user.setIsAuth(false);
     user.setUser({});
+    window.localStorage.setItem('token', '');
   };
   console.log('USER in welcome: ', (user.user as IUser).name);
   const LoggedUserView = () => {
