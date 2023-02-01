@@ -12,6 +12,7 @@ const FullNameInput: React.FC<IFullNameInputProps> = ({ name, handleFormChange }
         full name:
       </label>
       <input
+        data-testid="input-fullname"
         className="form-input"
         type="text"
         id="name"

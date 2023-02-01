@@ -12,6 +12,7 @@ const EmailInput: React.FC<IEmailInputProps> = ({ email, handleFormChange }) => 
         e-mail:
       </label>
       <input
+        data-testid="input-email"
         className="form-input"
         type="email"
         id="email"

@@ -12,6 +12,7 @@ const PasswordInput: React.FC<IPasswordInputProps> = ({ password, handleFormChan
         password:
       </label>
       <input
+        data-testid="input-password"
         className="form-input"
         type="password"
         id="password"
