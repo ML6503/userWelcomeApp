@@ -5,9 +5,7 @@ const host = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   proxy: false,
   headers: {
-    // 'Content-Type': 'application/x-www-form-urlencoded',
     'Content-Type': 'application/json;charset=utf-8',
-    // Authorization: `Bearer ${localStorage.getItem('token')}`,
   },
   timeout: 5000,
 });
