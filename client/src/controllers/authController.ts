@@ -3,16 +3,20 @@ import { login, registration } from '../http/userAPI';
 import { IUser } from '../utils/interface';
 
 class AuthController {
-  _user: IUser | {};
-  public errorMsg: string;
+  public _user: IUser | {};
+  public _errorMsg: string;
 
   constructor() {
     this._user = {};
-    this.errorMsg = '';
+    this._errorMsg = '';
   }
 
   get user() {
     return this._user;
+  }
+
+  get errorMsg() {
+    return this._errorMsg;
   }
 
   async toRegister(name: string, email: string, password: string) {
@@ -36,7 +40,7 @@ class AuthController {
   catchError(e: unknown) {
     if (e instanceof AxiosError) {
       const errorText = e.response?.data.message;
-      this.errorMsg = errorText;
+      this._errorMsg = errorText;
     } else {
       console.error(e);
     }

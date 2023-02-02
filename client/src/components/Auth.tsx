@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useContext } from 'react';
+import React, { useState, useReducer, useContext, Dispatch, SetStateAction } from 'react';
 import { observer } from 'mobx-react-lite';
 //import { AxiosError } from 'axios';
 import { IUser, IValueUser } from 'utils/interface';
@@ -12,95 +12,79 @@ import SubmitButton from './form/SubmitButton';
 import AuthController from '../controllers/authController';
 
 interface IAuthProps {
-  userStore: UserStore;
+  // userStore: UserStore;
+  isNewUser: boolean;
+  setIsNewUser: Dispatch<SetStateAction<boolean>>;
+  error: string | undefined;
+  setError: Dispatch<SetStateAction<string | undefined>>;
+  toAuthUser: (email: string, password: string, name?: string) => Promise<void>;
 }
 
-const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
-  const [isNewUser, setIsNewUser] = useState<boolean>(false);
-  const [error, setError] = useState<string | undefined>('');
+const Auth: React.FC<IAuthProps> = observer(
+  ({ setError, error, setIsNewUser, isNewUser, toAuthUser }) => {
+    const initalFormValues = {
+      name: '',
+      email: '',
+      password: '',
+    };
+    const [formValues, setFormValues] = useReducer(
+      (currVal: IValueUser, newVal: IValueUser) => ({
+        ...currVal,
+        ...newVal,
+      }),
+      initalFormValues
+    );
 
-  const initalFormValues = {
-    name: '',
-    email: '',
-    password: '',
-  };
-  const [formValues, setFormValues] = useReducer(
-    (currVal: IValueUser, newVal: IValueUser) => ({
-      ...currVal,
-      ...newVal,
-    }),
-    initalFormValues
-  );
+    const { name, email, password } = formValues;
 
-  const { name, email, password } = formValues;
+    const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault();
 
-  const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
+      const value = event.target.value;
+      const inputName = event.target.name;
 
-    const value = event.target.value;
-    const inputName = event.target.name;
+      setError((prev) => {
+        if (prev !== value) {
+          return '';
+        }
+      });
+      setFormValues({ [inputName]: value });
+    };
 
-    setError((prev) => {
-      if (prev !== value) {
-        return '';
+    const handleSubmit = async (event: React.FormEvent) => {
+      event.preventDefault();
+
+      if (isNewUser) {
+        await toAuthUser(email, password, name);
+      } else {
+        await toAuthUser(email, password);
       }
-    });
-    setFormValues({ [inputName]: value });
-  };
+    };
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    const authController = new AuthController();
-    if (isNewUser) {
-      await authController.toRegister(name, email, password);
-    } else {
-      await authController.toLogin(email, password);
-    }
-    userStore.setUser(authController.user);
-    userStore.setIsAuth(true);
-    // try {
-    //   let user: IUser;
+    const toEnterApp = (e: React.MouseEvent<HTMLSpanElement>) => {
+      e.preventDefault;
+      setIsNewUser((prev) => !prev);
+      setError('');
+    };
 
-    //   if (isNewUser) {
-    //     user = await registration(name, email, password);
-    //   } else {
-    //     user = await login(email, password);
-    //   }
-    //   userStore.setUser(user);
-    //   userStore.setIsAuth(true);
-    // } catch (e) {
-    //   if (e instanceof AxiosError) {
-    //     const errorText = e.response?.data.message;
-    //     setError(errorText);
-    //   } else {
-    //     console.error(e);
-    //   }
-    // }
-  };
-
-  const toEnterApp = (e: React.MouseEvent<HTMLSpanElement>) => {
-    e.preventDefault;
-    setIsNewUser((prev) => !prev);
-    setError('');
-  };
-
-  return (
-    <div className="user-view-wrapper">
-      <div className="user-view">
-        <div className="form-wraper">
-          {isNewUser ? <h4>Getting started</h4> : <h4>Log into your account</h4>}
-          <form data-testid="form" className="form" onSubmit={handleSubmit}>
-            <span className="error">{error !== '' && error}</span>
-            {isNewUser && <FullNameInput name={name} handleFormChange={handleFormChange} />}
-            <EmailInput email={email} handleFormChange={handleFormChange} />
-            <PasswordInput password={password} handleFormChange={handleFormChange} />
-            <SubmitButton isNewUser={isNewUser} />
-            <SignupEl isNewUser={isNewUser} toEnterApp={toEnterApp} />
-          </form>
+    return (
+      <div className="user-view-wrapper">
+        <div className="user-view">
+          <div className="form-wraper">
+            {isNewUser ? <h4>Getting started</h4> : <h4>Log into your account</h4>}
+            <form data-testid="form" className="form" onSubmit={handleSubmit}>
+              <span className="error">{error !== '' && error}</span>
+              {isNewUser && <FullNameInput name={name} handleFormChange={handleFormChange} />}
+              <EmailInput email={email} handleFormChange={handleFormChange} />
+              <PasswordInput password={password} handleFormChange={handleFormChange} />
+              <SubmitButton isNewUser={isNewUser} />
+              <SignupEl isNewUser={isNewUser} toEnterApp={toEnterApp} />
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 export default Auth;

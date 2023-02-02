@@ -6,6 +6,7 @@ import AuthController from '../controllers/authController';
 
 describe('EmailInput when render with email prop', () => {
   beforeEach(() => jest.clearAllMocks());
+  afterAll(() => jest.resetAllMocks());
   it('should pass it to input value on change', async () => {
     const user = new UserStore();
     const mockedSetUser = jest.spyOn(user, 'setUser');
@@ -20,7 +21,12 @@ describe('EmailInput when render with email prop', () => {
 
     mockedToLogin.mockImplementation((email, password) => Promise.resolve());
 
-    render(<Auth userStore={user} />);
+    // render(<Auth
+    //   setError={jest.fn(() => {})}
+    //   error={''}
+    //   setIsNewUser={jest.fn(() => {})}}
+    //   isNewUser={}
+    //   toAuthUser={jest.fn(() => {})} />);
 
     const form = screen.getByTestId('form');
     expect(form).toBeInTheDocument();

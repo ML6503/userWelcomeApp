@@ -2,7 +2,7 @@ import jwt_decode from 'jwt-decode';
 import { IUser } from 'utils/interface';
 import { host, authHost } from './host';
 
-export const registration = async (name: string, email: string, password: string) => {
+export const registration = async (email: string, password: string, name: string) => {
   const { data } = await host.post('/api/users/registration', { name, email, password });
   localStorage.setItem('token', data.token);
   return jwt_decode(data.token) as IUser;
