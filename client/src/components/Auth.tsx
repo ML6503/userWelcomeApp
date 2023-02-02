@@ -79,7 +79,7 @@ const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
       <div className="user-view">
         <div className="form-wraper">
           {isNewUser ? <h4>Getting started</h4> : <h4>Log into your account</h4>}
-          <form className="form" onSubmit={handleSubmit}>
+          <form data-testid="form" className="form" onSubmit={handleSubmit}>
             <span className="error">{error !== '' && error}</span>
             {isNewUser && <FullNameInput name={name} handleFormChange={handleFormChange} />}
             <EmailInput email={email} handleFormChange={handleFormChange} />
