@@ -1,18 +1,20 @@
 import React, { useState, useReducer, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import { AxiosError } from 'axios';
+//import { AxiosError } from 'axios';
 import { IUser, IValueUser } from 'utils/interface';
-import { registration, login } from '../http/userAPI';
+//import { registration, login } from '../http/userAPI';
 import PasswordInput from './form/PasswordInput';
 import FullNameInput from './form/FullNameInput';
 import EmailInput from './form/EmailInput';
 import SignupEl from './form/SignupEl';
 import UserStore from '../store/userStore';
 import SubmitButton from './form/SubmitButton';
+import AuthController from '../controllers/authController';
 
 interface IAuthProps {
   userStore: UserStore;
 }
+
 const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
   const [isNewUser, setIsNewUser] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>('');
@@ -48,24 +50,32 @@ const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    try {
-      let user: IUser;
-
-      if (isNewUser) {
-        user = await registration(name, email, password);
-      } else {
-        user = await login(email, password);
-      }
-      userStore.setUser(user);
-      userStore.setIsAuth(true);
-    } catch (e) {
-      if (e instanceof AxiosError) {
-        const errorText = e.response?.data.message;
-        setError(errorText);
-      } else {
-        console.error(e);
-      }
+    const authController = new AuthController();
+    if (isNewUser) {
+      await authController.toRegister(name, email, password);
+    } else {
+      await authController.toLogin(email, password);
     }
+    userStore.setUser(authController.user);
+    userStore.setIsAuth(true);
+    // try {
+    //   let user: IUser;
+
+    //   if (isNewUser) {
+    //     user = await registration(name, email, password);
+    //   } else {
+    //     user = await login(email, password);
+    //   }
+    //   userStore.setUser(user);
+    //   userStore.setIsAuth(true);
+    // } catch (e) {
+    //   if (e instanceof AxiosError) {
+    //     const errorText = e.response?.data.message;
+    //     setError(errorText);
+    //   } else {
+    //     console.error(e);
+    //   }
+    // }
   };
 
   const toEnterApp = (e: React.MouseEvent<HTMLSpanElement>) => {
@@ -79,7 +89,7 @@ const Auth: React.FC<IAuthProps> = observer(({ userStore }) => {
       <div className="user-view">
         <div className="form-wraper">
           {isNewUser ? <h4>Getting started</h4> : <h4>Log into your account</h4>}
-          <form className="form" onSubmit={handleSubmit}>
+          <form data-testid="form" className="form" onSubmit={handleSubmit}>
             <span className="error">{error !== '' && error}</span>
             {isNewUser && <FullNameInput name={name} handleFormChange={handleFormChange} />}
             <EmailInput email={email} handleFormChange={handleFormChange} />
