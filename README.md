@@ -23,6 +23,9 @@ in both client and server folders
 
 - $ git clone https://github.com/ML6503/userWelcomeApp.git
 
+# install dependencies in client and server
+
+- $ npm install
 
 # start server 
 
