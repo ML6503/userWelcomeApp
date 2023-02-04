@@ -12,19 +12,19 @@ export default class UserStore {
     makeAutoObservable(this);
   }
 
-  public setIsAuth(isAuth: boolean) {
+  setIsAuth(isAuth: boolean) {
     this._isAuth = isAuth;
   }
 
-  public setUser(user: IUser | {}) {
+  setUser(user: IUser | {}) {
     this._user = user;
   }
 
-  public get user() {
+  get user() {
     return this._user;
   }
 
-  public get isAuth() {
+  get isAuth() {
     return this._isAuth;
   }
 }

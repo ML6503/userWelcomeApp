@@ -1,18 +1,14 @@
 import { AxiosError } from 'axios';
+import UserStore from 'store/userStore';
 import { login, registration } from '../http/userAPI';
-import { IUser } from '../utils/interface';
 
 class AuthController {
-  public _user: IUser | {};
   public _errorMsg: string;
+  private userStore: UserStore;
 
-  constructor() {
-    this._user = {};
+  constructor(userStore: UserStore) {
     this._errorMsg = '';
-  }
-
-  get user() {
-    return this._user;
+    this.userStore = userStore;
   }
 
   get errorMsg() {
@@ -22,7 +18,9 @@ class AuthController {
   async toRegister(name: string, email: string, password: string) {
     try {
       const newUser = await registration(name, email, password);
-      this._user = newUser;
+
+      this.userStore.setUser(newUser);
+      this.userStore.setIsAuth(true);
     } catch (e) {
       this.catchError(e);
     }
@@ -31,7 +29,9 @@ class AuthController {
   async toLogin(email: string, password: string) {
     try {
       const existingUser = await login(email, password);
-      this._user = existingUser;
+
+      this.userStore.setUser(existingUser);
+      this.userStore.setIsAuth(true);
     } catch (e) {
       this.catchError(e);
     }
