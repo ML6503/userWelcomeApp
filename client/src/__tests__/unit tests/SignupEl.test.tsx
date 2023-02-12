@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import SignupEl from '../components/form/SignupEl';
+import SignupEl from '../../components/form/SignupEl';
 
 describe('Sign Up Element when render with initial isNewUser === false  prop', () => {
   const mockToEnterApp = jest.fn();

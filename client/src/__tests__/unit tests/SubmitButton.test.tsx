@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import SubmitButton from '../components/form/SubmitButton';
+import SubmitButton from '../../components/form/SubmitButton';
 
 describe('SubmitButton when render with isNewuser prop', () => {
   it('should display value Login when !isNewUser', () => {

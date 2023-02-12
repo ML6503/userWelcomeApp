@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import PasswordInput from '../components/form/PasswordInput';
+import PasswordInput from '../../components/form/PasswordInput';
 
 describe('PasswordInput when render with password prop', () => {
   const mockHandleChange = jest.fn();

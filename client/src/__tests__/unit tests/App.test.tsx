@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import App from '../components/App';
+import App from '../../components/App';
 
 describe('App when render', () => {
   it('should display Log into account form and after click on sign up - display Sign Up form', async () => {

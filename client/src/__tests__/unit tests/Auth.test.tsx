@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import Auth from '../components/Auth';
-import UserStore from '../store/userStore';
-import AuthController from '../controllers/authController';
+import Auth from '../../components/Auth';
+import UserStore from '../../store/userStore';
+import AuthController from '../../controllers/authController';
 
 describe('EmailInput when render with email prop', () => {
   beforeEach(() => jest.clearAllMocks());
@@ -14,7 +14,7 @@ describe('EmailInput when render with email prop', () => {
     mockedSetUser.mockImplementation(() => {});
     mockedIsAuth.mockImplementation(() => {});
 
-    const authController = new AuthController();
+    const authController = new AuthController(user);
     const mockedToRegister = jest.spyOn(authController, 'toRegister');
     const mockedToLogin = jest.spyOn(authController, 'toLogin');
     mockedToRegister.mockImplementation((name, email, password) => Promise.resolve());
