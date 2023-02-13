@@ -13,7 +13,7 @@ const LoggedUserView: React.FC<ILoggedUserViewProps> = ({ toLogout, userStore })
     <div className="welcome-user-wrapper">
       <WelcomeAnimation />
       <div className="username-wrapper">
-        <span> {(userStore.user as IUser).name}! </span>
+        <span data-testid="signed-username"> {(userStore.user as IUser).name}! </span>
         <span className="logout-span-container">
           To logout click{' '}
           <span className="logout-span" onClick={toLogout}>
