@@ -10,6 +10,15 @@ describe('testing sign up form', () => {
     cy.getByData('input-password').type('test1234!');
     cy.get('button').should('exist').should('have.length', 1).contains('Signup').click();
     cy.getByData('signed-username').should('exist');
+    cy.getByData('logout-here').click();
+  });
+
+  it('allows existing user to login', () => {
+    cy.getByData('login-heading').should('exist');
+    cy.getByData('input-email').type('test@test.com');
+    cy.getByData('input-password').type('test1234!');
+    cy.get('button').should('exist').should('have.length', 1).contains('Login').click();
+    cy.getByData('signed-username').should('exist').contains('New Name!');
   });
 });
 

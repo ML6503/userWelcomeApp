@@ -92,7 +92,7 @@ const Auth: React.FC<IAuthProps> = observer(({ user }) => {
           {isNewUser ? (
             <h4 data-test="signup-heading">Getting started</h4>
           ) : (
-            <h4 data-test="login-heading">Log into your account</h4>
+            <h4 data-testid="login-heading">Log into your account</h4>
           )}
           <form data-testid="form" className="form" onSubmit={handleSubmit}>
             <span className="error">{error !== '' && error}</span>

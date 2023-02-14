@@ -4,7 +4,7 @@ describe('home page', () => {
   });
 
   it('the h4 contains the correct text', () => {
-    cy.get('[data-test="login-heading"]').should('exist').contains('Log into your account');
+    cy.get('[data-testid="login-heading"]').should('exist').contains('Log into your account');
   });
 
   it('the home page contains  all elements', () => {
